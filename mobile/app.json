@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Task Management",
+    "slug": "task-management",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": ["**/*"]
+  }
+}
