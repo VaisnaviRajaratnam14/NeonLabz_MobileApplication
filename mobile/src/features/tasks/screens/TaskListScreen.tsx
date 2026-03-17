@@ -3,7 +3,9 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import LottieView from "lottie-react-native";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
+  Alert,
   Animated,
+  BackHandler,
   Easing,
   FlatList,
   RefreshControl,
@@ -161,6 +163,20 @@ export const TaskListScreen = () => {
     navigation.navigate("TaskForm", { mode: "add" });
   }, [navigation]);
 
+  const onCloseApp = useCallback(() => {
+    Alert.alert("Close app?", "Do you want to close the application?", [
+      {
+        text: "Cancel",
+        style: "cancel"
+      },
+      {
+        text: "Close",
+        style: "destructive",
+        onPress: () => BackHandler.exitApp()
+      }
+    ]);
+  }, []);
+
   const sortedTasks = useMemo(
     () =>
       [...tasks].sort((left, right) => {
@@ -283,20 +299,29 @@ export const TaskListScreen = () => {
             <Text className="text-sm font-extrabold text-blueTheme-900">{summary.total} Tasks</Text>
           </View>
 
-          <Animated.View
-            style={{
-              transform: [{ scale: fabScale }, { scale: fabPulse }]
-            }}
-            className="absolute right-5 top-4"
-          >
+          <View className="absolute right-5 top-4 flex-row gap-2">
             <TouchableOpacity
-              onPress={onAdd}
+              onPress={onCloseApp}
               className="h-10 w-10 items-center justify-center rounded-2xl"
-              style={{ backgroundColor: "#19a2f2" }}
+              style={{ backgroundColor: "#f43f5e" }}
             >
-              <Text className="text-2xl font-bold text-white">+</Text>
+              <Text className="text-xl font-bold text-white">×</Text>
             </TouchableOpacity>
-          </Animated.View>
+
+            <Animated.View
+              style={{
+                transform: [{ scale: fabScale }, { scale: fabPulse }]
+              }}
+            >
+              <TouchableOpacity
+                onPress={onAdd}
+                className="h-10 w-10 items-center justify-center rounded-2xl"
+                style={{ backgroundColor: "#19a2f2" }}
+              >
+                <Text className="text-2xl font-bold text-white">+</Text>
+              </TouchableOpacity>
+            </Animated.View>
+          </View>
         </View>
       </Animated.View>
 
