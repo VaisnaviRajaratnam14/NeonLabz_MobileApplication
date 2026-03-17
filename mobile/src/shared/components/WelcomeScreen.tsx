@@ -43,7 +43,6 @@ export const WelcomeScreen = ({ onStart }: WelcomeScreenProps) => {
 
   return (
     <View className="flex-1 items-center justify-between px-8 pt-12 pb-14" style={{ backgroundColor: "#cfe5fb" }}>
-      {/* Lottie animation */}
       <View className="flex-1 items-center justify-center">
         <LottieView
           source={require("../../assets/animations/work managemnt.json")}
@@ -53,7 +52,6 @@ export const WelcomeScreen = ({ onStart }: WelcomeScreenProps) => {
         />
       </View>
 
-      {/* Text + button */}
       <Animated.View
         style={{ opacity: fadeAnim, transform: [{ translateY: slideAnim }] }}
         className="w-full items-center rounded-[28px] bg-white px-6 py-7"
